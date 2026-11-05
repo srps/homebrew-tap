@@ -1,0 +1,24 @@
+name: Test cask
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: macos-26
+    steps:
+      - name: Tap this checkout
+        run: |
+          brew tap "$GITHUB_REPOSITORY" "https://github.com/$GITHUB_REPOSITORY"
+          cd "$(brew --repository "$GITHUB_REPOSITORY")"
+          git fetch origin "$GITHUB_SHA"
+          git checkout --detach "$GITHUB_SHA"
+      - run: brew style srps/tap
+      - run: brew audit --cask --strict --online srps/tap/conduit
+      - name: Install and uninstall
+        run: |
+          brew install --cask srps/tap/conduit
+          test -d /Applications/Conduit.app
+          brew uninstall --cask srps/tap/conduit
