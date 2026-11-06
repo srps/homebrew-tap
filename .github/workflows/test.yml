@@ -23,4 +23,6 @@ jobs:
           test -d /Applications/Conduit.app
           brew uninstall --cask srps/tap/conduit
       - run: brew trust --tap srps/tap
-      - run: brew audit --cask --strict --online srps/tap/conduit
+      # homebrew/core has an unrelated `conduit` formula. The tap keeps the
+      # app's own name; users install it as srps/tap/conduit.
+      - run: brew audit --cask --strict --online --except=token_conflicts srps/tap/conduit
