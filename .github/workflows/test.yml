@@ -16,9 +16,11 @@ jobs:
           git fetch origin "$GITHUB_SHA"
           git checkout --detach "$GITHUB_SHA"
       - run: brew style srps/tap
-      - run: brew audit --cask --strict --online srps/tap/conduit
+      # Before any trust: this is the command the README gives users.
       - name: Install and uninstall
         run: |
           brew install --cask srps/tap/conduit
           test -d /Applications/Conduit.app
           brew uninstall --cask srps/tap/conduit
+      - run: brew trust --tap srps/tap
+      - run: brew audit --cask --strict --online srps/tap/conduit
