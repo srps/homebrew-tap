@@ -1,6 +1,6 @@
 cask "conduit" do
-  version "0.6.1"
-  sha256 "2be0f6a31eda8ad79daa723e9f21a22d46c63889d11d4a9e613980bb88be41d2"
+  version "0.6.2"
+  sha256 "ebca4557c09bf32b942095c1810494837700536139dab3a3eb2ab328ef079a0e"
 
   url "https://github.com/srps/Conduit/releases/download/v#{version}/Conduit-#{version}-macOS26-arm64.dmg"
   name "Conduit"
